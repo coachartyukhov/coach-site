@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import heroPhotoPlaceholder from '../assets/vue.svg'
+import aboutPhotoPlaceholder from '../assets/vite.svg'
 
 const formData = ref({
   name: '',
@@ -65,8 +67,9 @@ const onSubmit = async () => {
 <template>
   <header class="header">
     <div class="container nav">
-      <a class="brand" href="#hero">CoachFit</a>
+      <a class="brand" href="#hero">Артюхов Дмитрий - Здоровый Организм</a>
       <nav class="menu">
+        <a href="#signup">Все услуги</a>
         <a href="#hero">Курс</a>
         <a href="#results">Результаты</a>
         <a href="#trust">Почему я</a>
@@ -79,32 +82,228 @@ const onSubmit = async () => {
   <main>
     <section id="hero" class="hero">
       <div class="container">
-        <p class="eyebrow">Персональный тренинг в зале</p>
-        <h1>Актуальный курс: Сильное тело за 12 недель</h1>
-        <p class="lead">
-          Индивидуальная программа, контроль техники и поддержка 24/7, чтобы вы вышли на новый
-          уровень формы без травм и срывов.
-        </p>
-        <a class="button" href="#signup">Записаться на курс</a>
+        <div class="hero-layout">
+          <div class="hero-content">
+            <h1>Трансофрмация тела за 3 месяца</h1>
+            <p class="hero-subtitle">Олимпийская система подготовки</p>
+            <p class="hero-highlight">
+              Системная работа с телом, тренировки и восстановление организма под контролем
+              профессионального спортсмена и Участника Олимпйиских игр
+            </p>
+            <p class="lead">
+              Персональное сопровождение в зале с фокусом на быстрый, безопасный и заметный
+              результат.
+            </p>
+            <a class="button" href="#quiz">Пройти бесплатное тестирование</a>
+            <div class="hero-note">
+              <p>Большиство людей тренироуется, но не понимает что происходит с организмом.</p>
+              <p>Отсюда - отсутствие результата, усталость и откаты.</p>
+              <p>
+                Моя задача - выстриоть ситсему, в которой тело начинает работать правильно.
+              </p>
+            </div>
+          </div>
+          <div class="hero-photo-wrap">
+            <img
+              class="hero-photo"
+              :src="heroPhotoPlaceholder"
+              alt="Тренер в костюме с фруктом в руках"
+            />
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="results" class="section">
+    <section id="about" class="section">
       <div class="container">
-        <h2>Средние результаты клиентов</h2>
-        <div class="cards">
-          <article class="card">
-            <p class="metric">-6.5 кг</p>
-            <p>в среднем за 8 недель</p>
+        <div class="about-layout">
+          <article class="about-card">
+            <p class="eyebrow">Обо мне</p>
+            <p class="about-role">Профессиональный спортсмен</p>
+            <ul class="about-list">
+              <li>Мастер спорта международного класса</li>
+              <li>Участник олимпийских игр</li>
+              <li>Чемпион россии и европы</li>
+              <li>Член сборной команды России</li>
+            </ul>
+            <p class="about-text">
+              Я работаю с людьми которые хотят не просто "тренироваться", а понять свой организм,
+              выстроить систему, которая дает результат: энергию, форму и здоровье
+            </p>
+            <p class="about-text about-text-accent">
+              Опыт профессиональнгоо спорта я перенес в работу с клиентами - чтобы результат был
+              предсказуемым и контролируемым
+            </p>
+            <p class="about-text about-text-accent">Без догадок и эксперементов над организмом</p>
           </article>
-          <article class="card">
-            <p class="metric">+32%</p>
-            <p>рост силовых показателей</p>
+          <div class="about-photo-wrap">
+            <img
+              class="about-photo"
+              :src="aboutPhotoPlaceholder"
+              alt="Профессиональный спортсмен с оголенным торсом и гантелей в руках"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pain-solution" class="section">
+      <div class="container">
+        <article class="pain-card">
+          <p class="pain-subtitle">С чем ко мне приходят:</p>
+          <ul class="pain-list">
+            <li>Нет энергии</li>
+            <li>Вес не меняется или возвращается</li>
+            <li>Постоянная усталовсть</li>
+            <li>Тренировки есть, результата нет</li>
+          </ul>
+          <p class="pain-result">
+            Я провожу <strong>БЕСПЛАТНЫЙ аудит</strong>, определяю причины и выстраиваю систему,
+            которая дает результат
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="healthy-organism" class="section">
+      <div class="container">
+        <article class="offer-card">
+          <h2>Здоровый организм</h2>
+          <p class="offer-subtitle">Комплексный чекап организма и стратегия восстановления</p>
+          <p class="offer-lead">
+            Это полное понимание состояния вашего организма и четкий план действий
+          </p>
+          <p class="offer-includes">Что входит:</p>
+          <ul class="offer-list">
+            <li>
+              Бесплатный персональный чек-ап организма (60+ анализов) с расшифровкой от
+              спортивного врача-эндокринолога рядом с вашим домом
+            </li>
+            <li>Индивидуальный тренинг-план с видеоконтролем техники</li>
+            <li>
+              Персональная нутрициология, интегрированная в ваш стиль жизни (рестораны,
+              командировки, любимые продукты) без подсчета калорий
+            </li>
+            <li>
+              Контроль динамики прогресса по фото, замерам и самочувствию - первый результат уже
+              ЧЕРЕЗ 2 НЕДЕЛИ
+            </li>
+            <li>
+              Глубокий анализ здоровья с подбором БАДов для ускорения метаболизма и рельефа тела
+            </li>
+          </ul>
+          <a class="button offer-details-button" href="#services">Подробнее</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <div class="services-head">
+          <h2>ТРАНСФОРМАЦИЯ ТЕЛА ПОД КОНТРОЛЕМ ЧЕМПИОНА</h2>
+          <p class="services-subtitle">
+            Система работы на 3 месяца: диагностика -> стратегия -> сопровождение -> результат
+          </p>
+        </div>
+
+        <div class="packages-grid">
+          <article class="package-card">
+            <p class="package-title">ОНЛАЙН ТРАНСФОРМАЦИЯ</p>
+            <p class="package-for">Для тех, кто хочет результат из любого города</p>
+            <ul>
+              <li>Индивидуальная программа тренировок</li>
+              <li>Сопровождение через приложение</li>
+              <li>Контроль прогресса</li>
+              <li>Разбор техники</li>
+              <li>Медицинский чек-up</li>
+              <li>Рекомендации по питанию и калориям</li>
+            </ul>
+            <p class="package-meta">Формат: Онлайн сопровождение 24/7</p>
+            <p class="package-price">от 15 000 ₽ / мес</p>
+            <a class="button" href="#signup">Записаться</a>
           </article>
-          <article class="card">
-            <p class="metric">94%</p>
-            <p>доходят до цели по плану</p>
+
+          <article class="package-card">
+            <p class="package-title">ОФЛАЙН ТРЕНИРОВКИ</p>
+            <p class="package-for">Для тех, кто хочет максимум контроля и быстрый результат</p>
+            <ul>
+              <li>Персональные тренировки в зале</li>
+              <li>Индивидуальная программа</li>
+              <li>Контроль техники</li>
+              <li>Коррекция питания</li>
+              <li>Чек-up + эндокринолог</li>
+            </ul>
+            <p class="package-meta">Формат: 1 на 1 в зале</p>
+            <p class="package-price">от 25 000 ₽ / мес</p>
+            <a class="button" href="#signup">Записаться</a>
           </article>
+
+          <article class="package-card">
+            <p class="package-title">CHECK-UP + СТРАТЕГИЯ</p>
+            <p class="package-for">Для тех, кто застрял и не понимает причину</p>
+            <ul>
+              <li>Медицинское обследование</li>
+              <li>Заключение врача-эндокринолога</li>
+              <li>Разбор тела и метаболизма</li>
+              <li>План тренировок</li>
+              <li>План питания</li>
+            </ul>
+            <p class="package-meta">Формат: Разовая диагностика</p>
+            <p class="package-price">10 000 ₽</p>
+            <a class="button" href="#quiz">Пройти диагностику</a>
+          </article>
+
+          <article class="package-card">
+            <p class="package-title">КОНСУЛЬТАЦИЯ 60 МИН</p>
+            <p class="package-for">Для быстрого разбора ситуации</p>
+            <ul>
+              <li>Анализ питания и тренировок</li>
+              <li>Разбор ошибок</li>
+              <li>Персональные рекомендации</li>
+              <li>Четкий план действий</li>
+            </ul>
+            <p class="package-meta">Формат: Онлайн / офлайн</p>
+            <p class="package-price">5 000 ₽</p>
+            <a class="button" href="#signup">Записаться</a>
+          </article>
+        </div>
+
+        <div class="services-offer">
+          <p class="offer-line-top">Ты не покупаешь тренировки.</p>
+          <p class="offer-line-main">
+            Ты входишь в систему изменения тела под контролем профессионального спортсмена сборной
+            России.
+          </p>
+        </div>
+
+        <div class="services-columns">
+          <article class="services-info-card">
+            <h3>ЧТО ТЫ ПОЛУЧАЕШЬ</h3>
+            <ul>
+              <li>Диагностику твоего тела и реального состояния</li>
+              <li>Персональную стратегию под твой организм</li>
+              <li>Контроль питания и тренировок</li>
+              <li>Системную работу, а не хаотичные попытки</li>
+              <li>Результат, который можно удерживать</li>
+            </ul>
+          </article>
+
+          <article class="services-info-card">
+            <h3>КОМУ НЕ ПОДОЙДЕТ</h3>
+            <ul>
+              <li>Тем, кто ищет "быстро и без усилий"</li>
+              <li>Тем, кто не готов соблюдать рекомендации</li>
+              <li>Тем, кто хочет просто "попробовать"</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="services-cta">
+          <p>
+            Выбирай формат работы и оставляй заявку — я свяжусь с тобой лично и подберу
+            оптимальный вариант.
+          </p>
+          <a class="button" href="#signup">ЗАПИСАТЬСЯ НА РАБОТУ</a>
         </div>
       </div>
     </section>
