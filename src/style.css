@@ -15,6 +15,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: var(--font);
@@ -1137,8 +1141,9 @@ h2 {
   letter-spacing: 0.06em;
   padding: 0.82rem 1.35rem;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.28s ease, box-shadow 0.28s ease;
   box-shadow: 0 12px 24px rgba(185, 150, 68, 0.35);
+  will-change: transform;
 }
 
 .hero-content .button {
@@ -1149,6 +1154,11 @@ h2 {
   background: linear-gradient(135deg, #e0c98b 0%, #c3a154 55%, #9e7d32 100%);
   transform: translateY(-1px);
   box-shadow: 0 16px 30px rgba(185, 150, 68, 0.45);
+}
+
+.button:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: 0 8px 18px rgba(185, 150, 68, 0.32);
 }
 
 .button-cta {

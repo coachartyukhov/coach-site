@@ -610,7 +610,7 @@ const personalPlan = computed(() => {
             <p class="package-meta">Стоимость зависит от задачи и формата работы</p>
             <div class="package-actions">
               <a class="button button-cta" href="#quiz" @click="chooseProduct('Здоровый орагнизм ОНЛАЙН')"
-                >Обсудить формат работы</a
+                >Пройти диагностику</a
               >
             </div>
           </div>
