@@ -790,7 +790,7 @@ h2 {
   border: 1px solid var(--border);
   border-radius: 20px;
   background: linear-gradient(180deg, rgba(27, 27, 27, 0.96), rgba(20, 20, 20, 0.96));
-  padding: 1.4rem;
+  padding: 1.15rem;
 }
 
 .quiz-progress {
@@ -802,7 +802,7 @@ h2 {
 }
 
 .quiz-title {
-  margin: 0 0 0.8rem;
+  margin: 0 0 0.55rem;
   color: var(--text);
   font-weight: 600;
 }
@@ -819,17 +819,20 @@ h2 {
 .photo-slot {
   border: 1px dashed rgba(185, 150, 68, 0.5);
   border-radius: 14px;
-  padding: 1.3rem;
+  padding: 0.7rem;
   text-align: center;
   color: var(--text-muted);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.55rem;
   background: rgba(185, 150, 68, 0.04);
 }
 
 .quiz-reference-photo {
   display: block;
-  width: 100%;
+  width: min(100%, 320px);
+  max-height: 195px;
+  margin: 0 auto;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .quiz-options {
@@ -1258,6 +1261,25 @@ h2 {
 
   .diagnostic-form {
     max-width: 100%;
+  }
+
+  .quiz-card {
+    padding: 0.95rem;
+  }
+
+  .quiz-title {
+    margin-bottom: 0.45rem;
+    font-size: 0.98rem;
+  }
+
+  .photo-slot {
+    padding: 0.55rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .quiz-reference-photo {
+    width: min(100%, 250px);
+    max-height: 150px;
   }
 
   .footer-links {
