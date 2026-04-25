@@ -1,67 +1,343 @@
 <script setup>
-import { ref } from 'vue'
-import heroPhotoPlaceholder from '../assets/vue.svg'
-import aboutPhotoPlaceholder from '../assets/vite.svg'
+import { computed, ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import heroPhoto from '../assets/hero-main.png'
+import aboutPhoto from '../assets/about-main-photo.png'
+import caseTemplatePhoto from '../assets/case-template.png'
+import case1Photo from '../assets/case-1.png'
+import case2Photo from '../assets/case-2.png'
+import case3Photo from '../assets/case-3.png'
+import case4Photo from '../assets/case-4.png'
+import case5Photo from '../assets/case-5.png'
+import case6Photo from '../assets/case-6.png'
+import case7Photo from '../assets/case-7.png'
+import case8Photo from '../assets/case-8.png'
+import case9Photo from '../assets/case-9.png'
+import case10Photo from '../assets/case-10.png'
+import case11Photo from '../assets/case-11.png'
+import maleStartPhoto from '../assets/male-start-points.png'
+import maleTargetPhoto from '../assets/male-target-points.png'
+import femaleStartPhoto from '../assets/female-start-points.png'
+import femaleTargetPhoto from '../assets/female-target-points.png'
 
-const formData = ref({
-  name: '',
-  phone: '',
-  goal: '',
-  level: 'Начинающий'
+const cases = [
+  {
+    id: 1,
+    name: 'Алексей',
+    age: 42,
+    beforePhotos: [case3Photo],
+    afterPhotos: [],
+    beforeLabel: '',
+    achievements: [
+      '-15кг жира',
+      '-17см в талии',
+      '+7кг мышечной массы',
+      'Убрали живот, повысили энергию и продуктивность',
+      'Пожали 100 кг от груди за 3 месяца'
+    ]
+  },
+  {
+    id: 2,
+    name: 'Диана',
+    age: 32,
+    beforePhotos: [case1Photo],
+    afterPhotos: [case2Photo],
+    achievements: [
+      'Сделали эстетичное тело',
+      'Улучшение показателей здоровья до 100%',
+      'Повышение выносливости'
+    ]
+  },
+  {
+    id: 3,
+    name: 'Виктория',
+    age: 39,
+    beforePhotos: [case4Photo],
+    afterPhotos: [case5Photo],
+    achievements: [
+      'Тотальная рекомпозиция за 12 месяцев',
+      'Привили любовь к правильному питанию',
+      'Улучшили качество тела и кожи',
+      'Стабилизировали гормональный фон'
+    ]
+  },
+  {
+    id: 4,
+    name: 'Даниил',
+    age: 22,
+    beforePhotos: [case11Photo],
+    afterPhotos: [case10Photo],
+    achievements: [
+      '+6кг мышц за 2 месяца',
+      'Увеличили силовые в 2 раза',
+      'Развили выносливость и подняли уровень энергии для работы'
+    ]
+  },
+  {
+    id: 5,
+    name: 'Виктория',
+    age: 36,
+    beforePhotos: [case7Photo],
+    afterPhotos: [case6Photo],
+    achievements: [
+      '-18 см в талии за 4 месяца',
+      'Перестроили пищевое поведение',
+      'Тренировались в домашних условиях',
+      'Полностью убрала живот при полном графике'
+    ]
+  },
+  {
+    id: 6,
+    name: 'Евгений',
+    age: 39,
+    beforePhotos: [caseTemplatePhoto],
+    afterPhotos: [caseTemplatePhoto],
+    achievements: [
+      'Снизили процент жира',
+      'Убрали отеки',
+      'Нормализовали восстановление через сон и режим нагрузок'
+    ]
+  },
+  {
+    id: 7,
+    name: 'Анна',
+    age: 44,
+    beforePhotos: [case8Photo],
+    afterPhotos: [case9Photo],
+    achievements: ['-10см в талии', '-5кг жирового компонента']
+  },
+  {
+    id: 8,
+    name: 'Роман',
+    age: 30,
+    beforePhotos: [caseTemplatePhoto],
+    afterPhotos: [caseTemplatePhoto],
+    achievements: ['Минус объем в талии', 'Плюс выносливость и тонус всего тела']
+  },
+  {
+    id: 9,
+    name: 'Артем',
+    age: 37,
+    beforePhotos: [caseTemplatePhoto],
+    afterPhotos: [caseTemplatePhoto],
+    achievements: ['Собрали стратегию питания в командировках', 'Стабилизировали вес без откатов']
+  },
+  {
+    id: 10,
+    name: 'Владислав',
+    age: 29,
+    beforePhotos: [caseTemplatePhoto],
+    afterPhotos: [caseTemplatePhoto],
+    achievements: ['Перевели хаотичные тренировки в систему', 'Сделали прогресс визуально заметным']
+  }
+]
+
+const currentCaseIndex = ref(0)
+const currentCase = computed(() => cases[currentCaseIndex.value])
+
+const showPrevCase = () => {
+  currentCaseIndex.value = (currentCaseIndex.value - 1 + cases.length) % cases.length
+}
+
+const showNextCase = () => {
+  currentCaseIndex.value = (currentCaseIndex.value + 1) % cases.length
+}
+
+const touchStartX = ref(0)
+const onCaseTouchStart = (event) => {
+  touchStartX.value = event.changedTouches[0]?.clientX ?? 0
+}
+const onCaseTouchEnd = (event) => {
+  const endX = event.changedTouches[0]?.clientX ?? 0
+  const delta = endX - touchStartX.value
+  if (Math.abs(delta) < 45) return
+  if (delta < 0) showNextCase()
+  else showPrevCase()
+}
+
+const maleStartOptions = ['40%+', '23-35%', '15-20%', '8-10%']
+const maleTargetOptions = ['5%', '6-10%', '12-14%', '15%+']
+const femaleStartOptions = ['24-26%', '27-29%', '36-40%', '50%+']
+const femaleTargetOptions = ['10-12%', '15-17%', '21-23%', '24-26%']
+
+const goalOptions = [
+  'Избавиться от жира',
+  'Нарастить мышечную массу',
+  'Похудеть не важно как, главное цифры на весах',
+  'Увеличить силовые показатели (БОЛЬШЕ пожать/присесть/подтянуться)',
+  'Избавиться от боли в суставах',
+  'Заняться растяжкой, улучшить мобильность организма',
+  'Реабилитация после травм/операций',
+  'Подготовиться к соревнованиям/триатлону/боевые искусства',
+  'Нужна помощь в похудении к соревнованиям с сохранением кондиций организма'
+]
+
+const concernOptions = [
+  'Лишний вес',
+  'Отсутствие энергии',
+  'Плохое самочувствие',
+  'Низкое качество тела',
+  'Слабый иммунитет',
+  'Нет времени',
+  'Нет мотивации',
+  'Болят суставы',
+  'Был неудачный опыт'
+]
+const timelineOptions = ['1-2 месяца', '3-6 месяцев', 'Не важно, главное достичь']
+
+const quizForm = ref({
+  gender: '',
+  startPoint: '',
+  targetPoint: '',
+  goals: [],
+  concerns: [],
+  timeline: '',
+  contact: '',
+  selectedProduct: '',
+  consent: false
 })
-const formStatus = ref('')
-const isSubmitting = ref(false)
 
-const sendToTelegram = async () => {
-  const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN
-  const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID
-
-  if (!botToken || !chatId) {
-    throw new Error('Telegram credentials are not configured')
+const toggleMultiSelect = (fieldName, option) => {
+  const selected = quizForm.value[fieldName]
+  if (selected.includes(option)) {
+    quizForm.value[fieldName] = selected.filter((item) => item !== option)
+    return
   }
+  quizForm.value[fieldName] = [...selected, option]
+}
 
-  const message = [
-    'Новая заявка с сайта:',
-    `Имя: ${formData.value.name}`,
-    `Телефон: ${formData.value.phone}`,
-    `Цель: ${formData.value.goal}`,
-    `Уровень: ${formData.value.level}`
-  ].join('\n')
+const resetQuiz = () => {
+  quizForm.value = {
+    gender: '',
+    startPoint: '',
+    targetPoint: '',
+    goals: [],
+    concerns: [],
+    timeline: '',
+    contact: '',
+    selectedProduct: '',
+    consent: false
+  }
+  quizStep.value = 1
+}
 
-  const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: message
-    })
-  })
+const quizStep = ref(1)
+const totalQuizSteps = 8
 
-  if (!response.ok) {
-    throw new Error('Failed to send message')
+const startOptions = computed(() =>
+  quizForm.value.gender === 'female' ? femaleStartOptions : maleStartOptions
+)
+const targetOptions = computed(() =>
+  quizForm.value.gender === 'female' ? femaleTargetOptions : maleTargetOptions
+)
+
+const isCurrentStepValid = computed(() => {
+  switch (quizStep.value) {
+    case 1:
+      return Boolean(quizForm.value.gender)
+    case 2:
+      return Boolean(quizForm.value.startPoint)
+    case 3:
+      return Boolean(quizForm.value.targetPoint)
+    case 4:
+      return quizForm.value.goals.length > 0
+    case 5:
+      return quizForm.value.concerns.length > 0
+    case 6:
+      return Boolean(quizForm.value.timeline)
+    case 7:
+      return quizForm.value.contact.trim().length > 0
+    case 8:
+      return quizForm.value.consent
+    default:
+      return false
+  }
+})
+
+const goNextStep = () => {
+  if (!isCurrentStepValid.value) return
+  if (quizStep.value < totalQuizSteps) {
+    quizStep.value += 1
+    return
+  }
+  quizStep.value = totalQuizSteps + 1
+}
+
+const goPrevStep = () => {
+  if (quizStep.value > 1 && quizStep.value <= totalQuizSteps) {
+    quizStep.value -= 1
   }
 }
 
-const onSubmit = async () => {
-  formStatus.value = ''
-  isSubmitting.value = true
-
-  try {
-    await sendToTelegram()
-    formStatus.value = 'Спасибо! Ваша заявка отправлена, я скоро свяжусь с вами.'
-    formData.value = {
-      name: '',
-      phone: '',
-      goal: '',
-      level: 'Начинающий'
-    }
-  } catch (error) {
-    formStatus.value =
-      'Не удалось отправить заявку. Проверьте Telegram настройки и повторите попытку.'
-  } finally {
-    isSubmitting.value = false
-  }
+const chooseProduct = (productName) => {
+  quizForm.value.selectedProduct = productName
 }
+
+const openServiceInfo = ref('')
+const toggleServiceInfo = (serviceKey) => {
+  openServiceInfo.value = openServiceInfo.value === serviceKey ? '' : serviceKey
+}
+
+const fatLossGoalKeywords = ['Избавиться от жира', 'Похудеть не важно как, главное цифры на весах']
+const muscleGoalKeyword = 'Нарастить мышечную массу'
+
+const parsePercentValue = (label) => {
+  const normalized = label.replace('%', '').trim()
+  if (normalized.includes('+')) {
+    return Number.parseFloat(normalized.replace('+', ''))
+  }
+  if (normalized.includes('-')) {
+    const [from, to] = normalized.split('-').map((part) => Number.parseFloat(part))
+    return (from + to) / 2
+  }
+  return Number.parseFloat(normalized)
+}
+
+const personalPlan = computed(() => {
+  const start = parsePercentValue(quizForm.value.startPoint || '0')
+  const target = parsePercentValue(quizForm.value.targetPoint || '0')
+  const delta = start - target
+
+  const wantsFatLoss = quizForm.value.goals.some((goal) => fatLossGoalKeywords.includes(goal))
+  const wantsMuscleGain = quizForm.value.goals.includes(muscleGoalKeyword)
+
+  let focus = 'рекомпозиция тела'
+  if (delta > 0.7 || wantsFatLoss) focus = 'снижение жира'
+  if (delta < -0.7 && wantsMuscleGain) focus = 'набор мышечной массы'
+
+  const title =
+    focus === 'снижение жира'
+      ? 'Твоя цель: снизить процент жира и сохранить мышцы'
+      : focus === 'набор мышечной массы'
+        ? 'Твоя цель: нарастить мышечную массу без перегруза'
+        : 'Твоя цель: улучшить качество тела через рекомпозицию'
+
+  const recommendation =
+    focus === 'снижение жира'
+      ? 'Оптимальный путь: умеренный дефицит калорий + силовые тренировки 3-4 раза в неделю + контроль восстановления.'
+      : focus === 'набор мышечной массы'
+        ? 'Оптимальный путь: небольшой профицит калорий + прогрессирующие силовые тренировки + достаточное восстановление.'
+        : 'Оптимальный путь: настройка питания под вашу активность + силовые тренировки + стабильный режим сна и восстановления.'
+
+  const firstResultText =
+    focus === 'набор мышечной массы'
+      ? 'Первый результат по набору мышц обычно заметен через 3-4 недели при соблюдении плана.'
+      : focus === 'снижение жира'
+        ? 'Первый результат по снижению жира обычно заметен через 3-4 недели при соблюдении плана.'
+        : 'Первый заметный результат обычно появляется через 3-4 недели при соблюдении плана.'
+
+  const timelineText = quizForm.value.timeline
+    ? `Реалистичный горизонт под ваш запрос: ${quizForm.value.timeline}.`
+    : 'Реалистичный горизонт уточним после финальной проверки анкеты.'
+
+  return {
+    title,
+    recommendation,
+    firstResultText,
+    timelineText,
+    metrics: `Старт: ${quizForm.value.startPoint || '—'} -> Цель: ${quizForm.value.targetPoint || '—'}.`
+  }
+})
 </script>
 
 <template>
@@ -69,12 +345,11 @@ const onSubmit = async () => {
     <div class="container nav">
       <a class="brand" href="#hero">Артюхов Дмитрий - Здоровый Организм</a>
       <nav class="menu">
-        <a href="#signup">Все услуги</a>
+        <a href="#products">Все услуги</a>
         <a href="#hero">Курс</a>
-        <a href="#results">Результаты</a>
-        <a href="#trust">Почему я</a>
+        <a href="#cases">Результаты</a>
+        <RouterLink to="/about">Об авторе</RouterLink>
         <a href="#quiz">Диагностика</a>
-        <a href="#signup">Записаться</a>
       </nav>
     </div>
   </header>
@@ -84,17 +359,16 @@ const onSubmit = async () => {
       <div class="container">
         <div class="hero-layout">
           <div class="hero-content">
-            <h1>Трансофрмация тела за 3 месяца</h1>
-            <p class="hero-subtitle">Олимпийская система подготовки</p>
+            <h1>Подтянутое тело с мышцами за 90 дней</h1>
             <p class="hero-highlight">
-              Системная работа с телом, тренировки и восстановление организма под контролем
-              профессионального спортсмена и Участника Олимпйиских игр
+              Персональная работа с питанием, тренировками и восстановлением под руководством
+              Учсатника Олимпийских игр, Магистра КГУФКСТ, Мастера Спорта Международного Класса с
+              фокусом на безопасный и заметный результат
             </p>
             <p class="lead">
-              Персональное сопровождение в зале с фокусом на быстрый, безопасный и заметный
-              результат.
+              Пройди диагностику и получи план под свою цель.
             </p>
-            <a class="button" href="#quiz">Пройти бесплатное тестирование</a>
+            <a class="button button-cta" href="#quiz">Пройти диагностику</a>
             <div class="hero-note">
               <p>Большиство людей тренироуется, но не понимает что происходит с организмом.</p>
               <p>Отсюда - отсутствие результата, усталость и откаты.</p>
@@ -106,41 +380,8 @@ const onSubmit = async () => {
           <div class="hero-photo-wrap">
             <img
               class="hero-photo"
-              :src="heroPhotoPlaceholder"
+              :src="heroPhoto"
               alt="Тренер в костюме с фруктом в руках"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <div class="about-layout">
-          <article class="about-card">
-            <p class="eyebrow">Обо мне</p>
-            <p class="about-role">Профессиональный спортсмен</p>
-            <ul class="about-list">
-              <li>Мастер спорта международного класса</li>
-              <li>Участник олимпийских игр</li>
-              <li>Чемпион россии и европы</li>
-              <li>Член сборной команды России</li>
-            </ul>
-            <p class="about-text">
-              Я работаю с людьми которые хотят не просто "тренироваться", а понять свой организм,
-              выстроить систему, которая дает результат: энергию, форму и здоровье
-            </p>
-            <p class="about-text about-text-accent">
-              Опыт профессиональнгоо спорта я перенес в работу с клиентами - чтобы результат был
-              предсказуемым и контролируемым
-            </p>
-            <p class="about-text about-text-accent">Без догадок и эксперементов над организмом</p>
-          </article>
-          <div class="about-photo-wrap">
-            <img
-              class="about-photo"
-              :src="aboutPhotoPlaceholder"
-              alt="Профессиональный спортсмен с оголенным торсом и гантелей в руках"
             />
           </div>
         </div>
@@ -150,17 +391,35 @@ const onSubmit = async () => {
     <section id="pain-solution" class="section">
       <div class="container">
         <article class="pain-card">
-          <p class="pain-subtitle">С чем ко мне приходят:</p>
+          <p class="pain-subtitle">Ты узнаешь себя?</p>
           <ul class="pain-list">
             <li>Нет энергии</li>
             <li>Вес не меняется или возвращается</li>
             <li>Постоянная усталовсть</li>
             <li>Тренировки есть, результата нет</li>
+            <li>Среывы на сладкое</li>
+            <li>Боли / дискомофт</li>
           </ul>
           <p class="pain-result">
             Я провожу <strong>БЕСПЛАТНЫЙ аудит</strong>, определяю причины и выстраиваю систему,
             которая дает результат
           </p>
+          <a class="button pain-cta-button" href="#quiz">Хочу разобраться с телом</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="problem" class="section">
+      <div class="container">
+        <article class="problem-card">
+          <p class="eyebrow">ПРОБЛЕМА НЕ В ТЕБЕ</p>
+          <h2>Ты просто не выстроил систему работы с телом</h2>
+          <div class="problem-points">
+            <p>1. Хаотичные тренировки</p>
+            <p>2. Питание без контроля</p>
+            <p>3. Отсутсвтие системы</p>
+          </div>
+          <p class="problem-note">Поэтому результат либо временный, либо его нет.</p>
         </article>
       </div>
     </section>
@@ -191,94 +450,293 @@ const onSubmit = async () => {
             <li>
               Глубокий анализ здоровья с подбором БАДов для ускорения метаболизма и рельефа тела
             </li>
+            <li>Вебинары по работе с питанием и пищевыми привычками</li>
+            <li>Лайфаки по закаливанию тела</li>
+            <li>Видео с техникой выполнения упражнений</li>
           </ul>
-          <a class="button offer-details-button" href="#services">Подробнее</a>
+          <a class="button offer-details-button" href="#products">Подробнее</a>
         </article>
       </div>
     </section>
 
-    <section id="services" class="section">
+    <section id="cases" class="section">
       <div class="container">
-        <div class="services-head">
-          <h2>ТРАНСФОРМАЦИЯ ТЕЛА ПОД КОНТРОЛЕМ ЧЕМПИОНА</h2>
-          <p class="services-subtitle">
-            Система работы на 3 месяца: диагностика -> стратегия -> сопровождение -> результат
-          </p>
+        <div class="cases-head">
+          <p class="eyebrow">Реальные трансформации</p>
+          <h2>Кейсы клиентов</h2>
+          <p class="lead">10 шаблонов кейсов в формате: фото до, фото после, имя, возраст и результат.</p>
         </div>
 
-        <div class="packages-grid">
-          <article class="package-card">
-            <p class="package-title">ОНЛАЙН ТРАНСФОРМАЦИЯ</p>
-            <p class="package-for">Для тех, кто хочет результат из любого города</p>
-            <ul>
-              <li>Индивидуальная программа тренировок</li>
-              <li>Сопровождение через приложение</li>
-              <li>Контроль прогресса</li>
-              <li>Разбор техники</li>
-              <li>Медицинский чек-up</li>
-              <li>Рекомендации по питанию и калориям</li>
-            </ul>
-            <p class="package-meta">Формат: Онлайн сопровождение 24/7</p>
-            <p class="package-price">от 15 000 ₽ / мес</p>
-            <a class="button" href="#signup">Записаться</a>
+        <div class="cases-slider">
+          <button class="case-nav" type="button" @click="showPrevCase" aria-label="Предыдущий отзыв">
+            ←
+          </button>
+
+          <article class="case-card" @touchstart="onCaseTouchStart" @touchend="onCaseTouchEnd">
+            <div class="case-photos" :class="{ 'single-photo': !currentCase.afterPhotos.length }">
+              <figure class="case-photo-block">
+                <img class="case-photo" :src="currentCase.beforePhotos[0]" :alt="`Кейс ${currentCase.name}: до`" />
+                <figcaption v-if="currentCase.beforeLabel ?? true">{{ currentCase.beforeLabel || 'До' }}</figcaption>
+              </figure>
+              <figure v-if="currentCase.afterPhotos.length" class="case-photo-block">
+                <img class="case-photo" :src="currentCase.afterPhotos[0]" :alt="`Кейс ${currentCase.name}: после`" />
+                <figcaption>После</figcaption>
+              </figure>
+            </div>
+
+            <div class="case-content">
+              <p class="case-person">{{ currentCase.name }}, {{ currentCase.age }} лет</p>
+              <ul class="case-results-list">
+                <li v-for="(item, idx) in currentCase.achievements" :key="`${currentCase.id}-${idx}`">
+                  <span>{{ item }}</span>
+                  <span class="case-check">✓</span>
+                </li>
+              </ul>
+              <p class="case-counter">{{ currentCaseIndex + 1 }} / {{ cases.length }}</p>
+            </div>
           </article>
 
-          <article class="package-card">
-            <p class="package-title">ОФЛАЙН ТРЕНИРОВКИ</p>
-            <p class="package-for">Для тех, кто хочет максимум контроля и быстрый результат</p>
-            <ul>
-              <li>Персональные тренировки в зале</li>
-              <li>Индивидуальная программа</li>
-              <li>Контроль техники</li>
-              <li>Коррекция питания</li>
-              <li>Чек-up + эндокринолог</li>
-            </ul>
-            <p class="package-meta">Формат: 1 на 1 в зале</p>
-            <p class="package-price">от 25 000 ₽ / мес</p>
-            <a class="button" href="#signup">Записаться</a>
-          </article>
+          <button class="case-nav" type="button" @click="showNextCase" aria-label="Следующий отзыв">
+            →
+          </button>
+        </div>
+      </div>
+    </section>
 
-          <article class="package-card">
-            <p class="package-title">CHECK-UP + СТРАТЕГИЯ</p>
-            <p class="package-for">Для тех, кто застрял и не понимает причину</p>
-            <ul>
-              <li>Медицинское обследование</li>
-              <li>Заключение врача-эндокринолога</li>
-              <li>Разбор тела и метаболизма</li>
-              <li>План тренировок</li>
-              <li>План питания</li>
-            </ul>
-            <p class="package-meta">Формат: Разовая диагностика</p>
-            <p class="package-price">10 000 ₽</p>
-            <a class="button" href="#quiz">Пройти диагностику</a>
-          </article>
+    <section id="workflow" class="section">
+      <div class="container">
+        <div class="workflow-head">
+          <p class="eyebrow">Пошаговый процесс</p>
+          <h2>Как проходит работа</h2>
+        </div>
 
-          <article class="package-card">
-            <p class="package-title">КОНСУЛЬТАЦИЯ 60 МИН</p>
-            <p class="package-for">Для быстрого разбора ситуации</p>
-            <ul>
-              <li>Анализ питания и тренировок</li>
-              <li>Разбор ошибок</li>
-              <li>Персональные рекомендации</li>
-              <li>Четкий план действий</li>
-            </ul>
-            <p class="package-meta">Формат: Онлайн / офлайн</p>
-            <p class="package-price">5 000 ₽</p>
-            <a class="button" href="#signup">Записаться</a>
+        <div class="workflow-steps">
+          <article class="workflow-step">
+            <div class="workflow-step-number">01</div>
+            <p>Проходите короткий опросник по состоянию вашего здоровья.</p>
+          </article>
+          <div class="workflow-arrow" aria-hidden="true">→</div>
+
+          <article class="workflow-step">
+            <div class="workflow-step-number">02</div>
+            <p>Я провожу вам аудит длительностью 30-60 минут.</p>
+          </article>
+          <div class="workflow-arrow" aria-hidden="true">→</div>
+
+          <article class="workflow-step">
+            <div class="workflow-step-number">03</div>
+            <p>Сдаете необходимые анализы в клинике рядом с вашим домом.</p>
+          </article>
+          <div class="workflow-arrow" aria-hidden="true">→</div>
+
+          <article class="workflow-step">
+            <div class="workflow-step-number">04</div>
+            <p>Получаете заключение врача-эндокринолога.</p>
+          </article>
+          <div class="workflow-arrow" aria-hidden="true">→</div>
+
+          <article class="workflow-step">
+            <div class="workflow-step-number">05</div>
+            <p>Начинаем работу.</p>
           </article>
         </div>
 
-        <div class="services-offer">
-          <p class="offer-line-top">Ты не покупаешь тренировки.</p>
-          <p class="offer-line-main">
-            Ты входишь в систему изменения тела под контролем профессионального спортсмена сборной
-            России.
+      </div>
+    </section>
+
+    <section id="products" class="section">
+      <div class="container">
+        <div class="services-head services-head-centered">
+          <h2>УСЛУГИ</h2>
+          <p class="services-subtitle">Выберите формат работы, который подходит вашей цели.</p>
+        </div>
+
+        <article class="package-card package-flagship">
+          <p class="package-title">Флагман</p>
+          <h3>Здоровый орагнизм ОНЛАЙН</h3>
+          <p class="package-subhead">Управление физическим ресурсом под персональным контролем</p>
+          <p class="package-for">
+            Формат индивидуальной работы для тех, кому важно держать организм в рабочем состоянии при
+            высокой нагрузке.
           </p>
+          <p class="package-for">
+            Это не про «похудеть» или «начать тренироваться». Это про систему, в которой тело
+            стабильно работает: даёт энергию, выдерживает стресс и не выходит из строя.
+          </p>
+          <p class="package-for">
+            Я беру на себя управление ключевыми процессами: нагрузка, питание, восстановление,
+            показатели организма.
+          </p>
+          <div class="package-top-actions">
+            <RouterLink to="/app-workflow" class="button button-secondary service-info-button"
+              >Работа через приложение</RouterLink
+            >
+            <div class="service-info-hover" :class="{ 'service-info-open': openServiceInfo === 'online' }">
+              <button
+                type="button"
+                class="button button-secondary service-info-button"
+                @click="toggleServiceInfo('online')"
+              >
+                Что входит
+              </button>
+              <div class="service-info-popover">
+                <p>Включено:</p>
+                <ul>
+                  <li>Комплексная оценка состояния</li>
+                  <li>Назначение и контроль анализов</li>
+                  <li>Работа с врачом-эндокринологом</li>
+                  <li>Индивидуальная стратегия питания</li>
+                  <li>Персональные тренировки</li>
+                  <li>Контроль питания (включая формат по фото)</li>
+                  <li>Регулярные корректировки</li>
+                  <li>Прямая связь</li>
+                </ul>
+                <p>Как строится работа:</p>
+                <p>Все решения принимаются на основе данных и динамики, а не ощущений.</p>
+                <p>Нагрузка и питание адаптируются под твой график, а не наоборот.</p>
+                <p>Результат:</p>
+                <ul>
+                  <li>Стабильный уровень энергии</li>
+                  <li>Контроль веса и состава тела</li>
+                  <li>Предсказуемое состояние организма</li>
+                  <li>Снижение рисков перегрузки и срывов</li>
+                </ul>
+                <p>Формат: Индивидуальное сопровождение онлайн</p>
+                <p>Условия: Работаю с ограниченным количеством клиентов. Перед началом — согласование.</p>
+              </div>
+            </div>
+          </div>
+          <div class="package-footer">
+            <p class="package-meta">Стоимость зависит от задачи и формата работы</p>
+            <div class="package-actions">
+              <a class="button button-cta" href="#quiz" @click="chooseProduct('Здоровый орагнизм ОНЛАЙН')"
+                >Обсудить формат работы</a
+              >
+            </div>
+          </div>
+        </article>
+
+        <div class="packages-grid products-secondary">
+          <article class="package-card">
+            <p class="package-title">Здоровый организм ОФЛАЙН</p>
+            <p class="package-subhead">Персональная работа с полным контролем</p>
+            <p class="package-for">
+              Формат для тех, кому важно передать управление процессом специалисту и не тратить
+              время на самостоятельные решения.
+            </p>
+            <p class="package-for">
+              Тренировочный процесс, нагрузка и прогресс находятся под полным контролем.
+            </p>
+            <div class="service-info-hover" :class="{ 'service-info-open': openServiceInfo === 'offline' }">
+              <button
+                type="button"
+                class="button button-secondary service-info-button"
+                @click="toggleServiceInfo('offline')"
+              >
+                Что входит
+              </button>
+              <div class="service-info-popover">
+                <ul>
+                  <li>Индивидуальные тренировки</li>
+                  <li>Контроль техники и нагрузки</li>
+                  <li>Адаптация под текущий ресурс</li>
+                  <li>Интеграция питания и восстановления</li>
+                  <li>Работа с показателями организма</li>
+                </ul>
+                <p>Подход:</p>
+                <p>Минимум лишних действий — только то, что даёт результат.</p>
+                <p>Формат: Личная работа</p>
+                <p>Условия: Ограниченное количество мест</p>
+              </div>
+            </div>
+            <div class="package-footer">
+              <p class="package-meta">Стоимость зависит от задачи и формата работы</p>
+              <a class="button" href="#quiz" @click="chooseProduct('Здоровый организм ОФЛАЙН')"
+                >Пройти тестирование</a
+              >
+            </div>
+          </article>
+          <article class="package-card">
+            <p class="package-title">Чекап + стретегия</p>
+            <p class="package-for">
+              Разбор текущего состояния организма с формированием чёткой стратегии.
+            </p>
+            <p class="package-for">
+              Подходит, если нужно быстро понять: в каком состоянии ты находишься и какие действия
+              дадут результат без потери времени.
+            </p>
+            <div class="service-info-hover" :class="{ 'service-info-open': openServiceInfo === 'checkup' }">
+              <button
+                type="button"
+                class="button button-secondary service-info-button"
+                @click="toggleServiceInfo('checkup')"
+              >
+                Что входит
+              </button>
+              <div class="service-info-popover">
+                <ul>
+                  <li>Подбор и контроль анализов</li>
+                  <li>Интерпретация показателей</li>
+                  <li>Заключение врача-эндокринолога</li>
+                  <li>Рекомендации по питанию</li>
+                  <li>Стратегия нагрузок</li>
+                  <li>Пошаговый план действий</li>
+                </ul>
+                <p>Результат:</p>
+                <p>Ты получаешь структурированную систему: что происходит -> что делать -> какой будет результат</p>
+              </div>
+            </div>
+            <div class="package-footer">
+              <p class="package-meta">Формат: Онлайн</p>
+              <p class="package-price">Стоимость: от 19.000р</p>
+              <a class="button button-cta" href="#quiz" @click="chooseProduct('Чекап + стретегия')"
+                >Пройти аудит</a
+              >
+            </div>
+          </article>
+          <article class="package-card">
+            <p class="package-title">Консультация</p>
+            <p class="package-for">
+              Персональная сессия, на которой разбирается текущая ситуация и принимаются решения.
+            </p>
+            <p class="package-for">
+              Без общих рекомендаций — только конкретные действия с учётом твоих целей и ресурса.
+            </p>
+            <div class="service-info-hover" :class="{ 'service-info-open': openServiceInfo === 'consult' }">
+              <button
+                type="button"
+                class="button button-secondary service-info-button"
+                @click="toggleServiceInfo('consult')"
+              >
+                Подходит если
+              </button>
+              <div class="service-info-popover">
+                <ul>
+                  <li>нет результата при текущих действиях</li>
+                  <li>нужно быстро скорректировать стратегию</li>
+                  <li>требуется экспертная оценка</li>
+                </ul>
+                <p>Результат:</p>
+                <ul>
+                  <li>где теряется результат</li>
+                  <li>какие действия неэффективны</li>
+                  <li>что нужно изменить</li>
+                </ul>
+                <p>Формат: Онлайн</p>
+                <p>Длительность: 60-90 минут</p>
+              </div>
+            </div>
+            <div class="package-footer">
+              <p class="package-meta">Формат: Онлайн</p>
+              <p class="package-price">Стоимость: 6.000Р</p>
+              <a class="button button-cta" href="#quiz" @click="chooseProduct('Консультация')">Записаться</a>
+            </div>
+          </article>
         </div>
 
         <div class="services-columns">
           <article class="services-info-card">
-            <h3>ЧТО ТЫ ПОЛУЧАЕШЬ</h3>
+            <h3>Что ты получаешь</h3>
             <ul>
               <li>Диагностику твоего тела и реального состояния</li>
               <li>Персональную стратегию под твой организм</li>
@@ -289,7 +747,7 @@ const onSubmit = async () => {
           </article>
 
           <article class="services-info-card">
-            <h3>КОМУ НЕ ПОДОЙДЕТ</h3>
+            <h3>Кому не подойдет</h3>
             <ul>
               <li>Тем, кто ищет "быстро и без усилий"</li>
               <li>Тем, кто не готов соблюдать рекомендации</li>
@@ -297,13 +755,34 @@ const onSubmit = async () => {
             </ul>
           </article>
         </div>
+      </div>
+    </section>
 
-        <div class="services-cta">
-          <p>
-            Выбирай формат работы и оставляй заявку — я свяжусь с тобой лично и подберу
-            оптимальный вариант.
-          </p>
-          <a class="button" href="#signup">ЗАПИСАТЬСЯ НА РАБОТУ</a>
+    <section id="about" class="section">
+      <div class="container">
+        <div class="about-layout about-layout-single">
+          <article class="about-card about-card-merged">
+            <div class="about-photo-wrap about-photo-inline">
+              <img
+                class="about-photo"
+                :src="aboutPhoto"
+                alt="Профессиональный спортсмен с оголенным торсом и гантелей в руках"
+              />
+            </div>
+            <p class="eyebrow">ОБО МНЕ</p>
+            <p class="about-role">Профессиональный спортсмен и наставник</p>
+            <ul class="about-list">
+              <li>Магистр КГУФКСТ</li>
+              <li>Мастер спорта международного класса</li>
+              <li>Участник олимпийских игр</li>
+              <li>Чемпион россии и европы</li>
+              <li>Член сборной команды России</li>
+            </ul>
+            <p class="about-text">
+              Я помогаю выстроить систему, в которой питание, тренировки и восстановление работают на
+              ваш устойчивый результат.
+            </p>
+          </article>
         </div>
       </div>
     </section>
@@ -319,8 +798,8 @@ const onSubmit = async () => {
             <div class="trust-icon" aria-hidden="true">01</div>
             <h3>Профессиональная квалификация</h3>
             <p>
-              Сертифицированный тренер с практическим опытом более 7 лет и специализацией по
-              безопасной технике.
+              Высшее образование по специализации «Тренер», магистерская степень по системе
+              подготовки спортсменов.
             </p>
           </article>
           <article class="trust-card">
@@ -343,10 +822,16 @@ const onSubmit = async () => {
         <aside class="trust-proof">
           <p class="proof-title">Социальное доказательство</p>
           <p>
-            Более <strong>120 клиентов</strong> уже улучшили форму со мной: от снижения веса до
+            Более <strong>65 клиентов</strong> уже улучшили форму со мной: от снижения веса до
             уверенного возвращения в тренировки после долгого перерыва.
           </p>
         </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container services-cta">
+        <h2>Если ты хочешь реально зименить тело - начни с диагностики</h2>
       </div>
     </section>
 
@@ -354,48 +839,169 @@ const onSubmit = async () => {
       <div class="container">
         <h2>Бесплатная диагностика</h2>
         <p class="lead">
-          Ответьте на 4 вопроса, и я подберу вам стартовый план. Заявка отправляется в Telegram.
+          Ответьте на 10 вопросов и получите план трансформации + рекомендации под Вашу цель.
         </p>
-        <form class="quiz" @submit.prevent="onSubmit">
-          <label>
-            Имя
-            <input v-model.trim="formData.name" type="text" required placeholder="Ваше имя" />
-          </label>
-          <label>
-            Телефон
-            <input v-model.trim="formData.phone" type="tel" required placeholder="+7 (___) ___-__-__" />
-          </label>
-          <label>
-            Ваша цель
-            <textarea
-              v-model.trim="formData.goal"
-              required
-              rows="3"
-              placeholder="Похудеть, набрать мышечную массу, улучшить выносливость..."
-            ></textarea>
-          </label>
-          <label>
-            Текущий уровень
-            <select v-model="formData.level">
-              <option>Начинающий</option>
-              <option>Средний</option>
-              <option>Продвинутый</option>
-            </select>
-          </label>
-          <button class="button" type="submit" :disabled="isSubmitting">
-            {{ isSubmitting ? 'Отправка...' : 'Получить диагностику' }}
-          </button>
-          <p v-if="formStatus" class="status">{{ formStatus }}</p>
+
+        <form class="diagnostic-form" @submit.prevent="goNextStep">
+          <p v-if="quizStep <= totalQuizSteps" class="quiz-progress">
+            Шаг {{ quizStep }} из {{ totalQuizSteps }}
+          </p>
+
+          <article v-if="quizStep <= totalQuizSteps" class="quiz-card">
+            <p v-if="quizStep === 1" class="quiz-title">1. Пол</p>
+            <p v-else-if="quizStep === 2" class="quiz-title">
+              2. Выбери максимально похожую форму - это важно для расчета
+            </p>
+            <p v-else-if="quizStep === 3" class="quiz-title">3. Какого результата делаешь достичь</p>
+            <p v-else-if="quizStep === 4" class="quiz-title">4. Что для Вас сейчас в приоритете?</p>
+            <p v-else-if="quizStep === 5" class="quiz-title">5. Что беспокоит больше всего?</p>
+            <p v-else-if="quizStep === 6" class="quiz-title">6. За какой срок хочешь увидеть резульатат</p>
+            <p v-else-if="quizStep === 7" class="quiz-title">
+              7. Готовлю для Вас персональный план и рекомендации. Куда отправить?
+            </p>
+            <p v-else class="quiz-title">10. Даю согласие на обработку персональных данных</p>
+
+            <div v-if="quizStep === 1" class="quiz-options">
+              <label class="quiz-option">
+                <input v-model="quizForm.gender" type="radio" value="male" name="gender" />
+                <span>Мужской</span>
+              </label>
+              <label class="quiz-option">
+                <input v-model="quizForm.gender" type="radio" value="female" name="gender" />
+                <span>Женский</span>
+              </label>
+            </div>
+
+            <div v-else-if="quizStep === 2" class="quiz-options">
+              <div class="photo-slot">
+                <img
+                  v-if="quizForm.gender === 'male'"
+                  class="quiz-reference-photo"
+                  :src="maleStartPhoto"
+                  alt="Мужчины: варианты начальной точки по проценту жира"
+                />
+                <img
+                  v-else-if="quizForm.gender === 'female'"
+                  class="quiz-reference-photo"
+                  :src="femaleStartPhoto"
+                  alt="Женщины: варианты начальной точки по проценту жира"
+                />
+                <span v-else>Место для фото</span>
+              </div>
+              <label v-for="option in startOptions" :key="option" class="quiz-option">
+                <input v-model="quizForm.startPoint" type="radio" name="start-point" :value="option" />
+                <span>{{ option }}</span>
+              </label>
+            </div>
+
+            <div v-else-if="quizStep === 3" class="quiz-options">
+              <div class="photo-slot">
+                <img
+                  v-if="quizForm.gender === 'male'"
+                  class="quiz-reference-photo"
+                  :src="maleTargetPhoto"
+                  alt="Мужчины: варианты целевой точки по проценту жира"
+                />
+                <img
+                  v-else-if="quizForm.gender === 'female'"
+                  class="quiz-reference-photo"
+                  :src="femaleTargetPhoto"
+                  alt="Женщины: варианты целевой точки по проценту жира"
+                />
+                <span v-else>Место для фото</span>
+              </div>
+              <label v-for="option in targetOptions" :key="option" class="quiz-option">
+                <input v-model="quizForm.targetPoint" type="radio" name="target-point" :value="option" />
+                <span>{{ option }}</span>
+              </label>
+            </div>
+
+            <div v-else-if="quizStep === 4" class="quiz-options quiz-options-multi">
+              <label v-for="option in goalOptions" :key="option" class="quiz-option">
+                <input
+                  type="checkbox"
+                  :checked="quizForm.goals.includes(option)"
+                  @change="toggleMultiSelect('goals', option)"
+                />
+                <span>{{ option }}</span>
+              </label>
+            </div>
+
+            <div v-else-if="quizStep === 5" class="quiz-options quiz-options-multi">
+              <label v-for="option in concernOptions" :key="option" class="quiz-option">
+                <input
+                  type="checkbox"
+                  :checked="quizForm.concerns.includes(option)"
+                  @change="toggleMultiSelect('concerns', option)"
+                />
+                <span>{{ option }}</span>
+              </label>
+            </div>
+
+            <div v-else-if="quizStep === 6" class="quiz-options">
+              <label v-for="option in timelineOptions" :key="option" class="quiz-option">
+                <input v-model="quizForm.timeline" type="radio" name="timeline" :value="option" />
+                <span>{{ option }}</span>
+              </label>
+            </div>
+
+            <div v-else-if="quizStep === 7" class="quiz-options">
+              <p class="quiz-note">Оставьте номер/ник для связи и в какой мессенджер прислать файл?</p>
+              <input v-model.trim="quizForm.contact" type="text" placeholder="@nickname / +7 / Telegram..." />
+            </div>
+
+            <div v-else class="quiz-options">
+              <label class="quiz-option">
+                <input v-model="quizForm.consent" type="checkbox" />
+                <span>Согласен(а) на обработку персональных данных</span>
+              </label>
+            </div>
+
+            <div class="quiz-actions">
+              <button
+                v-if="quizStep > 1"
+                type="button"
+                class="button button-secondary"
+                @click="goPrevStep"
+              >
+                Назад
+              </button>
+              <button type="submit" class="button" :disabled="!isCurrentStepValid">
+                {{ quizStep === totalQuizSteps ? 'Получить план' : 'Далее' }}
+              </button>
+            </div>
+          </article>
+
+          <article v-else class="quiz-card quiz-finish">
+            <p class="quiz-title">Опросник заполнен</p>
+            <p class="quiz-note">
+              Смотрю твои результаты и понимаю, как довести до результата. Ниже твои индивидуальные
+              рекомендации, остальное пришлю в личку.
+            </p>
+            <div class="quiz-plan">
+              <p class="quiz-plan-title">{{ personalPlan.title }}</p>
+              <p class="quiz-plan-text">{{ personalPlan.metrics }}</p>
+              <p class="quiz-plan-text">{{ personalPlan.recommendation }}</p>
+              <p class="quiz-plan-text">{{ personalPlan.firstResultText }}</p>
+              <p class="quiz-plan-text">{{ personalPlan.timelineText }}</p>
+            </div>
+            <p v-if="quizForm.selectedProduct" class="quiz-note">
+              Выбранный продукт: <strong>{{ quizForm.selectedProduct }}</strong>
+            </p>
+            <button type="button" class="button" @click="resetQuiz">Заполнить еще раз</button>
+          </article>
         </form>
       </div>
     </section>
 
-    <section id="signup" class="section">
-      <div class="container cta">
-        <h2>Записаться</h2>
-        <p>Оставьте заявку на бесплатную консультацию, и мы вместе составим маршрут к вашей цели.</p>
-        <a class="button" href="#quiz">Оставить заявку</a>
+    <section class="section footer-section">
+      <div class="container footer-links">
+        <p class="quiz-note">
+          Продолжая пользоваться сайтом, вы соглашаетесь с использованием файлов cookie.
+        </p>
+        <RouterLink to="/privacy-policy" class="footer-policy-link">Политика конфиденциальности</RouterLink>
       </div>
     </section>
+
   </main>
 </template>
