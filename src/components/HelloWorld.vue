@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import heroPhoto from '../assets/hero-main.png'
-import aboutPhoto from '../assets/about-main-photo.png'
+import aboutBgPhoto from '../assets/about-bg-no-bg.png'
 import caseTemplatePhoto from '../assets/case-template.png'
 import case1Photo from '../assets/case-1.png'
 import case2Photo from '../assets/case-2.png'
@@ -762,23 +762,23 @@ const personalPlan = computed(() => {
       <div class="container">
         <div class="about-layout about-layout-single">
           <article class="about-card about-card-merged">
-            <div class="about-photo-wrap about-photo-inline">
-              <img
-                class="about-photo"
-                :src="aboutPhoto"
-                alt="Профессиональный спортсмен с оголенным торсом и гантелей в руках"
-              />
+            <img
+              class="about-bg-photo"
+              :src="aboutBgPhoto"
+              alt="Профессиональный спортсмен с тортом"
+            />
+            <div class="about-content-inline">
+              <p class="eyebrow">ОБО МНЕ</p>
+              <p class="about-role">Профессиональный спортсмен и наставник</p>
+              <ul class="about-list">
+                <li>Магистр КГУФКСТ</li>
+                <li>Мастер спорта международного класса</li>
+                <li>Участник олимпийских игр</li>
+                <li>Чемпион россии и европы</li>
+                <li>Член сборной команды России</li>
+              </ul>
             </div>
-            <p class="eyebrow">ОБО МНЕ</p>
-            <p class="about-role">Профессиональный спортсмен и наставник</p>
-            <ul class="about-list">
-              <li>Магистр КГУФКСТ</li>
-              <li>Мастер спорта международного класса</li>
-              <li>Участник олимпийских игр</li>
-              <li>Чемпион россии и европы</li>
-              <li>Член сборной команды России</li>
-            </ul>
-            <p class="about-text">
+            <p class="about-bottom-note">
               Я помогаю выстроить систему, в которой питание, тренировки и восстановление работают на
               ваш устойчивый результат.
             </p>

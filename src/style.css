@@ -110,12 +110,12 @@ a {
 
 .hero-photo-wrap {
   justify-self: end;
-  width: min(100%, 390px);
-  border-radius: 28px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  width: min(100%, 460px);
+  border-radius: 0;
+  overflow: visible;
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }
 
 .hero-photo {
@@ -124,6 +124,7 @@ a {
   height: 100%;
   min-height: 460px;
   object-fit: cover;
+  background: transparent;
 }
 
 .eyebrow {
@@ -227,11 +228,11 @@ h2 {
 
 .about-photo-wrap {
   justify-self: end;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+  border-radius: 0;
+  overflow: visible;
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }
 
 .about-photo {
@@ -240,6 +241,7 @@ h2 {
   height: 100%;
   min-height: 440px;
   object-fit: cover;
+  background: transparent;
 }
 
 .about-card {
@@ -252,11 +254,33 @@ h2 {
 .about-card-merged {
   max-width: 960px;
   margin: 0 auto;
+  position: relative;
+  display: block;
+  min-height: 460px;
+  padding: 2.1rem 2rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
 }
 
-.about-photo-inline {
-  margin-bottom: 1rem;
-  max-width: 420px;
+.about-bg-photo {
+  position: absolute;
+  right: 0;
+  bottom: -2%;
+  width: min(52%, 420px);
+  max-height: 100%;
+  object-fit: contain;
+  clip-path: inset(0 0 18% 0);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.about-content-inline {
+  margin-right: 34%;
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
 }
 
 .about-role {
@@ -268,6 +292,15 @@ h2 {
 .about-text {
   margin: 1rem 0 0;
   color: var(--text-muted);
+}
+
+.about-bottom-note {
+  margin: 1.15rem auto 0;
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 58ch;
+  position: relative;
+  z-index: 1;
 }
 
 .about-text-accent {
@@ -1217,7 +1250,7 @@ h2 {
 
   .hero-photo-wrap {
     justify-self: start;
-    width: min(100%, 360px);
+    width: min(100%, 400px);
   }
 
   .hero-photo {
@@ -1252,8 +1285,21 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .about-photo-inline {
-    max-width: 100%;
+  .about-card-merged {
+    min-height: 0;
+    padding: 1.2rem 0;
+  }
+
+  .about-content-inline {
+    margin-right: 0;
+  }
+
+  .about-bg-photo {
+    position: static;
+    width: min(100%, 340px);
+    display: block;
+    margin: 0 0 0.8rem auto;
+    clip-path: none;
   }
 
   .diagnostic-form {
