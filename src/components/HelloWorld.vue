@@ -600,7 +600,7 @@ const personalPlan = computed(() => {
               <button
                 type="button"
                 class="button-border button-secondary-border service-info-button"
-                @click="toggleServiceInfo('online')"
+                @hover="toggleServiceInfo('online')"
               >
                 Что входит
               </button>

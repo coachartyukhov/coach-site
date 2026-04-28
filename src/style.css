@@ -974,6 +974,7 @@ h2 {
 }
 
 .service-info-hover {
+  width: fit-content;
   position: relative;
   display: inline-block;
   margin: 0.25rem 0 0.5rem;
