@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import heroPhoto from '../assets/hero-main.png'
+import heroAuthorPhoto from '../assets/hero-author-photo.png'
 import aboutBgPhoto from '../assets/about-bg-no-bg.png'
 import caseTemplatePhoto from '../assets/case-template.png'
 import case1Photo from '../assets/case-1.png'
@@ -254,13 +254,48 @@ const isCurrentStepValid = computed(() => {
   }
 })
 
-const goNextStep = () => {
+const isSubmitting = ref(false)
+
+const goNextStep = async () => {
   if (!isCurrentStepValid.value) return
+
   if (quizStep.value < totalQuizSteps) {
     quizStep.value += 1
     return
   }
-  quizStep.value = totalQuizSteps + 1
+  if(isSubmitting.value) return
+  isSubmitting.value = true
+
+    try {
+  const response = await fetch('/api/send-to-telegram', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(quizForm.value)
+  })
+
+  // Сначала проверяем, есть ли тело ответа
+  const text = await response.text()
+  console.log('Raw response:', text)  // Посмотрите в консоли, что приходит
+
+  let result
+  try {
+    result = JSON.parse(text)
+  } catch (e) {
+    console.error('Не удалось распарсить JSON:', text)
+    throw new Error('Сервер вернул некорректный ответ')
+  }
+
+  if (response.ok && result.success) {
+    quizStep.value = totalQuizSteps + 1
+  } else {
+    alert('Ошибка: ' + (result.error || 'Попробуйте позже'))
+  }
+} catch (error) {
+  console.error('Network error: ', error)
+  alert('Не удалось отправить форму. Попробуйте позже или проверьте соединение')
+} finally {
+  isSubmitting.value = false
+}
 }
 
 const goPrevStep = () => {
@@ -337,6 +372,9 @@ const personalPlan = computed(() => {
     timelineText,
     metrics: `Старт: ${quizForm.value.startPoint || '—'} -> Цель: ${quizForm.value.targetPoint || '—'}.`
   }
+
+
+
 })
 </script>
 
@@ -380,7 +418,7 @@ const personalPlan = computed(() => {
           <div class="hero-photo-wrap">
             <img
               class="hero-photo"
-              :src="heroPhoto"
+              :src="heroAuthorPhoto"
               alt="Тренер в костюме с фруктом в руках"
             />
           </div>
@@ -469,7 +507,7 @@ const personalPlan = computed(() => {
 
         <div class="cases-slider">
           <button class="case-nav" type="button" @click="showPrevCase" aria-label="Предыдущий отзыв">
-            ←
+            <img width="20" height="20" src="../assets/icons/left-arrow.png" alt="left-arrow-cases"/>
           </button>
 
           <article class="case-card" @touchstart="onCaseTouchStart" @touchend="onCaseTouchEnd">
@@ -497,7 +535,7 @@ const personalPlan = computed(() => {
           </article>
 
           <button class="case-nav" type="button" @click="showNextCase" aria-label="Следующий отзыв">
-            →
+            <img width="20" height="20" src="../assets/icons/right-arrow.png" alt="right-arrow-cases"/>
           </button>
         </div>
       </div>
@@ -568,13 +606,13 @@ const personalPlan = computed(() => {
             показатели организма.
           </p>
           <div class="package-top-actions">
-            <RouterLink to="/app-workflow" class="button button-secondary service-info-button"
+            <RouterLink to="/app-workflow" class="button-border button-secondary-border service-info-button"
               >Работа через приложение</RouterLink
             >
             <div class="service-info-hover" :class="{ 'service-info-open': openServiceInfo === 'online' }">
               <button
                 type="button"
-                class="button button-secondary service-info-button"
+                class="button-border button-secondary-border service-info-button"
                 @click="toggleServiceInfo('online')"
               >
                 Что входит
