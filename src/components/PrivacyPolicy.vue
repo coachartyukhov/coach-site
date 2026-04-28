@@ -3,17 +3,6 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <header class="header">
-    <div class="container nav">
-      <a class="brand" href="/">Артюхов Дмитрий - Здоровый Организм</a>
-      <nav class="menu">
-        <RouterLink to="/">Главная</RouterLink>
-        <RouterLink to="/about">Об авторе</RouterLink>
-        <RouterLink to="/privacy-policy">Политика</RouterLink>
-      </nav>
-    </div>
-  </header>
-
   <main>
     <section class="section">
       <div class="container privacy-page">

@@ -379,19 +379,6 @@ const personalPlan = computed(() => {
 </script>
 
 <template>
-  <header class="header">
-    <div class="container nav">
-      <a class="brand" href="#hero">Артюхов Дмитрий - Здоровый Организм</a>
-      <nav class="menu">
-        <a href="#products">Все услуги</a>
-        <a href="#hero">Курс</a>
-        <a href="#cases">Результаты</a>
-        <RouterLink to="/about">Об авторе</RouterLink>
-        <a href="#quiz">Диагностика</a>
-      </nav>
-    </div>
-  </header>
-
   <main>
     <section id="hero" class="hero">
       <div class="container">
@@ -1031,15 +1018,5 @@ const personalPlan = computed(() => {
         </form>
       </div>
     </section>
-
-    <section class="section footer-section">
-      <div class="container footer-links">
-        <p class="quiz-note">
-          Продолжая пользоваться сайтом, вы соглашаетесь с использованием файлов cookie.
-        </p>
-        <RouterLink to="/privacy-policy" class="footer-policy-link">Политика конфиденциальности</RouterLink>
-      </div>
-    </section>
-
   </main>
 </template>

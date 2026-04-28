@@ -30,10 +30,6 @@ body {
   letter-spacing: 0.005em;
 }
 
-header {
-  padding: 0 24px;
-}
-
 main {
   max-width: 80%;
   margin: 0 auto;
@@ -1401,4 +1397,205 @@ h2 {
     align-items: flex-start;
   }
 
+}
+
+
+/* ============================= */
+/* 📱 TABLET ↓ (768px) */
+/* ============================= */
+@media (max-width: 768px) {
+  main {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .hero {
+    padding: 6rem 0 4rem;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  .lead {
+    font-size: 0.95rem;
+  }
+
+  .hero-note {
+    padding: 1rem;
+  }
+
+  .section {
+    padding: 3.5rem 0;
+  }
+
+  .offer-card,
+  .pain-card,
+  .about-card {
+    padding: 1.4rem;
+  }
+
+  .case-card {
+    min-height: auto;
+  }
+}
+
+
+/* ============================= */
+/* 📱 MOBILE (480px) */
+/* ============================= */
+@media (max-width: 480px) {
+  body {
+    line-height: 1.55;
+  }
+
+  .nav {
+    padding: 1rem 0;
+  }
+
+  .brand {
+    font-size: 0.75rem;
+    max-width: 70%;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .hero {
+    padding: 5rem 0 3rem;
+  }
+
+  .hero-photo {
+    min-height: 260px;
+  }
+
+  .hero-photo-wrap {
+    min-width: unset;
+  }
+
+  .cards {
+    gap: 0.7rem;
+  }
+
+  .card {
+    padding: 1.1rem;
+  }
+
+  .package-card {
+    padding: 1.2rem;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .button-border {
+    width: 100%;
+  }
+
+  .case-photos {
+    grid-template-columns: 1fr;
+  }
+
+  .case-photo {
+    aspect-ratio: 3 / 4;
+  }
+
+  .trust-card {
+    padding: 1.2rem;
+  }
+
+  .quiz-actions {
+    flex-direction: column;
+  }
+
+  .quiz-actions .button {
+    width: 100%;
+  }
+}
+
+
+/* ============================= */
+/* 📱 SMALL MOBILE (375px) */
+/* ============================= */
+@media (max-width: 375px) {
+  .container {
+    width: calc(100% - 1.5rem);
+  }
+
+  .brand {
+    font-size: 0.7rem;
+  }
+
+  h1 {
+    font-size: 1.45rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .hero {
+    padding: 4.5rem 0 2.5rem;
+  }
+
+  .hero-note {
+    padding: 0.85rem;
+  }
+
+  .offer-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .menu a {
+    font-size: 0.75rem;
+  }
+
+  .button {
+    font-size: 0.75rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .case-card {
+    padding: 1rem;
+  }
+}
+
+
+/* ============================= */
+/* 📱 ULTRA SMALL (320px) */
+/* ============================= */
+@media (max-width: 320px) {
+  .brand {
+    font-size: 0.65rem;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .button {
+    font-size: 0.7rem;
+    padding: 0.65rem 0.9rem;
+  }
+
+  .hero {
+    padding: 4rem 0 2rem;
+  }
 }

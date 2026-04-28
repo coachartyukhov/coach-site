@@ -10,19 +10,6 @@ const workflowImages = [appWork01, appWork1, appWork2, appWork3, appWork4]
 </script>
 
 <template>
-  <header class="header">
-    <div class="container nav">
-      <a class="brand" href="/">Артюхов Дмитрий - Здоровый Организм</a>
-      <nav class="menu">
-        <RouterLink to="/">Все услуги</RouterLink>
-        <RouterLink to="/">Курс</RouterLink>
-        <RouterLink to="/">Результаты</RouterLink>
-        <RouterLink to="/about">Об авторе</RouterLink>
-        <RouterLink to="/">Диагностика</RouterLink>
-      </nav>
-    </div>
-  </header>
-
   <main>
     <section class="section">
       <div class="container app-work-page">
