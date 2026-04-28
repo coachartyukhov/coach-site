@@ -15,6 +15,16 @@ import case8Photo from '../assets/case-8.png'
 import case9Photo from '../assets/case-9.png'
 import case10Photo from '../assets/case-10.png'
 import case11Photo from '../assets/case-11.png'
+
+import caseForSixStart from '../assets/feedback/first.jpg'
+import caseForSixTarget from '../assets/feedback/first1.jpg'
+import caseForEightStart from '../assets/feedback/second.jpg'
+import caseForEightTarget from '../assets/feedback/second1.jpg'
+import caseForNineStart from '../assets/feedback/third.jpg'
+import caseForNineTarget from '../assets/feedback/third1.jpg'
+import caseForTenStart from '../assets/feedback/four.jpg'
+import caseForTenTarget from '../assets/feedback/four1.jpg'
+
 import maleStartPhoto from '../assets/male-start-points.png'
 import maleTargetPhoto from '../assets/male-target-points.png'
 import femaleStartPhoto from '../assets/female-start-points.png'
@@ -90,8 +100,8 @@ const cases = [
     id: 6,
     name: 'Евгений',
     age: 39,
-    beforePhotos: [caseTemplatePhoto],
-    afterPhotos: [caseTemplatePhoto],
+    beforePhotos: [caseForSixStart],
+    afterPhotos: [caseForSixTarget],
     achievements: [
       'Снизили процент жира',
       'Убрали отеки',
@@ -110,24 +120,24 @@ const cases = [
     id: 8,
     name: 'Роман',
     age: 30,
-    beforePhotos: [caseTemplatePhoto],
-    afterPhotos: [caseTemplatePhoto],
+    beforePhotos: [caseForEightStart],
+    afterPhotos: [caseForEightTarget],
     achievements: ['Минус объем в талии', 'Плюс выносливость и тонус всего тела']
   },
   {
     id: 9,
     name: 'Артем',
     age: 37,
-    beforePhotos: [caseTemplatePhoto],
-    afterPhotos: [caseTemplatePhoto],
+    beforePhotos: [caseForNineStart],
+    afterPhotos: [caseForNineTarget],
     achievements: ['Собрали стратегию питания в командировках', 'Стабилизировали вес без откатов']
   },
   {
     id: 10,
     name: 'Владислав',
     age: 29,
-    beforePhotos: [caseTemplatePhoto],
-    afterPhotos: [caseTemplatePhoto],
+    beforePhotos: [caseForTenStart],
+    afterPhotos: [caseForTenTarget],
     achievements: ['Перевели хаотичные тренировки в систему', 'Сделали прогресс визуально заметным']
   }
 ]
