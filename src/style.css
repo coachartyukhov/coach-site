@@ -362,11 +362,6 @@ h2 {
   background: linear-gradient(135deg, #d6bb77 0%, #b99644 55%, #8f712c 100%);
   color: #101010;
   border: none;
-  box-shadow: 0 12px 24px rgba(185, 150, 68, 0.32);
-}
-
-.pain-cta-button:hover {
-  background: linear-gradient(135deg, #e0c98b 0%, #c3a154 55%, #9e7d32 100%);
 }
 
 .offer-card {
@@ -644,7 +639,6 @@ h2 {
   color: #0f0f0f;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 10px 24px rgba(185, 150, 68, 0.4);
   transform: translateY(-50%);
   z-index: 2;
 }
@@ -1186,7 +1180,6 @@ h2 {
   padding: 0.82rem 1.35rem;
   cursor: pointer;
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.28s ease, box-shadow 0.28s ease;
-  box-shadow: 0 12px 24px rgba(185, 150, 68, 0.35);
   will-change: transform;
 }
 
@@ -1216,24 +1209,20 @@ h2 {
 .button:hover {
   background: linear-gradient(135deg, #e0c98b 0%, #c3a154 55%, #9e7d32 100%);
   transform: translateY(-1px);
-  box-shadow: 0 16px 30px rgba(185, 150, 68, 0.45);
 }
 
 .button:active {
   transform: translateY(0) scale(0.985);
-  box-shadow: 0 8px 18px rgba(185, 150, 68, 0.32);
 }
 
 .button-cta {
   background: linear-gradient(135deg, #d6bb77 0%, #b99644 55%, #8f712c 100%);
   color: #111;
   border: none;
-  box-shadow: 0 16px 30px rgba(185, 150, 68, 0.42);
 }
 
 .button-cta:hover {
   background: linear-gradient(135deg, #e0c98b 0%, #c3a154 55%, #9e7d32 100%);
-  box-shadow: 0 16px 30px rgba(185, 150, 68, 0.45);
 }
 
 .offer-details-button {

@@ -90,7 +90,7 @@ const cases = [
     beforePhotos: [case7Photo],
     afterPhotos: [case6Photo],
     achievements: [
-      '-18 см в талии за 4 месяца',
+      '-18 см в талии за 8 месяцев',
       'Перестроили пищевое поведение',
       'Тренировались в домашних условиях',
       'Полностью убрала живот при полном графике'
@@ -866,7 +866,7 @@ const personalPlan = computed(() => {
 
     <section class="section">
       <div class="container services-cta">
-        <h2>Если ты хочешь реально зименить тело - начни с диагностики</h2>
+        <h2>Если ты хочешь реально изменить тело - начни с диагностики</h2>
       </div>
     </section>
 
